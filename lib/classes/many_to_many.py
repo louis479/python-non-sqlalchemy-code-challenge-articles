@@ -1,20 +1,19 @@
-
 class Article:
-    all = []  # List to store all articles
+    all = []  
     
     def __init__(self, author, magazine, title):
         # Title validation for immutability and length constraints
         if not isinstance(title, str) or not (5 <= len(title) <= 50):
             raise ValueError("Title must be a string between 5 and 50 characters.")
         
-        self._title = title  # Title is immutable
-        self.author = author  # Author should be mutable
-        self.magazine = magazine  # Magazine should be mutable
-        Article.all.append(self)  # Add the article to the list of all articles
+        self._title = title  
+        self.author = author  
+        self.magazine = magazine  
+        Article.all.append(self)  
 
     @property
     def title(self):
-        return self._title  # No setter, so it's immutable
+        return self._title  
 
     @property
     def author(self):
@@ -44,7 +43,7 @@ class Author:
         # Author name validation for immutability and non-empty string
         if not isinstance(name, str) or len(name) == 0:
             raise ValueError("Author name must be a non-empty string.")
-        self._name = name  # Name should be immutable
+        self._name = name  
 
     @property
     def name(self):
@@ -56,19 +55,15 @@ class Author:
         raise AttributeError("Author name is immutable and cannot be changed.")
 
     def add_article(self, magazine, title):
-        # Add an article written by this author to a given magazine
         return Article(self, magazine, title)
 
     def articles(self):
-        # Return all articles written by this author
         return [article for article in Article.all if article.author == self]
     
     def magazines(self):
-        # Return unique list of magazines this author has contributed to
         return list(set(article.magazine for article in self.articles()))
     
     def topic_areas(self):
-        # Return unique list of magazine categories the author has written in
         categories = list(set(magazine.category for magazine in self.magazines()))
         return categories if categories else None
 
@@ -86,7 +81,7 @@ class Magazine:
 
         self._name = name
         self._category = category
-        Magazine.all_magazines.append(self)  # Add the magazine to the list of all magazines
+        Magazine.all_magazines.append(self)  
 
     @property
     def name(self):
@@ -148,11 +143,11 @@ article_1 = author_1.add_article(magazine, "The mind of a programmer")
 
 # Test validation and immutability
 try:
-    article_1.title = "Updated Title"  # Should raise error since title is immutable
+    article_1.title = "Updated Title"  
 except AttributeError as e:
     print(e)
 
 try:
-    author_1.name = "Alexander O'niel"  # Should raise error since author name is immutable
+    author_1.name = "Alexander O'niel" 
 except AttributeError as e:
     print(e)
