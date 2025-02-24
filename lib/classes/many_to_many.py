@@ -138,7 +138,7 @@ class Magazine:
 magazine = Magazine("Sensors", "Internet of Things")  
 magazine.category = "Science & Technology"  
 
-author_1 = Author("John Doe")
+author_1 = Author("Alexander O'niel")
 article_1 = author_1.add_article(magazine, "The mind of a programmer")
 
 # Test validation and immutability
